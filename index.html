@@ -12,6 +12,24 @@ color:white;
 font-family:Arial;
 text-align:center;
 margin:0;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,#00ff9d22,#000000,#00ff9d22);
+animation:moveBg 8s linear infinite;
+z-index:-1;
+}
+
+@keyframes moveBg{
+0%{transform:translateX(-50%)}
+100%{transform:translateX(50%)}
 }
 
 header{
@@ -81,7 +99,7 @@ text-decoration:none;
 <p>Sinais de opções binárias todos os dias</p>
 
 <a href="https://t.me/seutelegram">
-<button>ENTRAR NA SALA VIP</button>
+<button>ENTRAR NA SALA GRÁTIS</button>
 </a>
 
 </header>
