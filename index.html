@@ -1,37 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
+
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Mercado Financeiro VIP</title>
 
 <style>
 
 body{
-background:#000;
-color:white;
-font-family:Arial;
-text-align:center;
 margin:0;
+font-family:Arial;
+background:black;
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
 }
 
 header{
 padding:120px 20px;
-background:#0a0a0a;
-border-bottom:2px solid #00ff9d;
 }
 
 h1{
 color:#00ff9d;
-font-size:40px;
+font-size:42px;
+margin-bottom:10px;
+}
+
+.sub{
+color:#ccc;
+font-size:18px;
+}
+
+.estatisticas{
+margin-top:30px;
+font-size:20px;
+color:#00ff9d;
+font-weight:bold;
 }
 
 button{
-background:#00ff9d;
-border:none;
-padding:15px 35px;
+margin-top:25px;
+padding:15px 40px;
 font-size:18px;
+border:none;
 border-radius:6px;
+background:#00ff9d;
 cursor:pointer;
-margin-top:15px;
+font-weight:bold;
 }
 
 button:hover{
@@ -44,14 +69,16 @@ padding:60px 20px;
 
 .card{
 background:#111;
-padding:30px;
-margin:20px auto;
-max-width:600px;
-border-radius:10px;
+padding:35px;
+max-width:650px;
+margin:auto;
+border-radius:12px;
+box-shadow:0 0 20px rgba(0,255,157,0.2);
 }
 
 .card h2{
 color:#00ff9d;
+margin-bottom:20px;
 }
 
 ul{
@@ -59,8 +86,28 @@ list-style:none;
 padding:0;
 }
 
-.video{
+ul li{
+margin:10px 0;
+font-size:18px;
+}
+
+.resultados{
 margin-top:40px;
+}
+
+.video{
+margin-top:50px;
+}
+
+iframe{
+border-radius:10px;
+}
+
+footer{
+margin-top:50px;
+padding:20px;
+color:#888;
+font-size:14px;
 }
 
 </style>
@@ -69,13 +116,28 @@ margin-top:40px;
 
 <body>
 
+<canvas id="matrix"></canvas>
+
 <header>
 
 <h1>Mercado Financeiro VIP</h1>
-<p>Sinais de opções binárias todos os dias</p>
+
+<p class="sub">Sinais de opções binárias todos os dias</p>
+
+<div class="estatisticas">
+
+<p>🔥 +12.847 operações vencedoras</p>
+
+<p>📊 Assertividade média: 91%</p>
+
+<p>✔ Resultados atualizados diariamente</p>
+
+</div>
 
 <a href="https://t.me/mercadofinanceiro01">
+
 <button>ENTRAR NA SALA GRÁTIS</button>
+
 </a>
 
 </header>
@@ -83,22 +145,30 @@ margin-top:40px;
 <section>
 
 <div class="card">
+
 <h2>📈 O que você encontra aqui</h2>
 
 <ul>
+
 <li>Sinais de opções binárias</li>
+
 <li>Sala VIP exclusiva</li>
+
 <li>Gestão de banca</li>
+
 <li>Resultados diários</li>
+
 </ul>
 
 </div>
 
-<div class="card">
+<div class="card resultados">
+
 <h2>🔥 Resultados reais</h2>
 
-<p>Mais de centenas de operações lucrativas.</p>
-<p>Entre na sala e acompanhe ao vivo.</p>
+<p>Centenas de operações lucrativas todos os meses.</p>
+
+<p>Entre na sala e acompanhe os resultados ao vivo.</p>
 
 </div>
 
@@ -107,14 +177,65 @@ margin-top:40px;
 <h2>🎥 Último vídeo do canal</h2>
 
 <iframe width="90%" height="315"
-src="https://www.youtube.com/embed/"
+src="https://www.youtube.com/watch?v=FYIhqrRxK1o"
 frameborder="0"
-allowfullscreen>
-</iframe>
+allowfullscreen></iframe>
 
 </div>
 
 </section>
+
+<footer>
+
+Mercado Financeiro VIP ©
+
+</footer>
+
+<script>
+
+var canvas = document.getElementById("matrix");
+var ctx = canvas.getContext("2d");
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+var letters = "アァイィウエオカキクケコサシスセソタチツテト0123456789";
+letters = letters.split("");
+
+var fontSize = 14;
+var columns = canvas.width/fontSize;
+
+var drops = [];
+
+for(var x = 0; x < columns; x++)
+drops[x] = 1;
+
+function draw(){
+
+ctx.fillStyle = "rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle = "#00ff9d";
+ctx.font = fontSize + "px arial";
+
+for(var i = 0; i < drops.length; i++){
+
+var text = letters[Math.floor(Math.random()*letters.length)];
+
+ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+
+if(drops[i]*fontSize > canvas.height && Math.random() > 0.975)
+drops[i] = 0;
+
+drops[i]++;
+
+}
+
+}
+
+setInterval(draw,33);
+
+</script>
 
 </body>
 </html>
