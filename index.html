@@ -90,7 +90,29 @@ color:#888;
 a{
 text-decoration:none;
 }
+.grafico-bg{
+position:relative;
+height:300px;
+width:100%;
+overflow:hidden;
+}
 
+#grafico{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+}
+
+.info-par{
+position:absolute;
+top:10px;
+right:20px;
+color:#00ff9d;
+font-size:18px;
+font-weight:bold;
+}
 </style>
 
 </head>
@@ -98,7 +120,12 @@ text-decoration:none;
 <body>
 
 <header>
-
+<div class="grafico-bg">
+<canvas id="grafico"></canvas>
+<div class="info-par">
+EUR/USD • M5
+</div>
+</div>
 <h1>Mercado Financeiro VIP</h1>
 
 <p>Sinais de opções binárias todos os dias</p>
@@ -225,6 +252,65 @@ drops[i]++;
 }
 
 setInterval(draw, 33);
+
+</script>
+<script>
+
+const canvas = document.getElementById("grafico")
+const ctx = canvas.getContext("2d")
+
+canvas.width = window.innerWidth
+canvas.height = 300
+
+let candles = []
+
+function criarCandle(){
+let open = Math.random()*200
+let close = open + (Math.random()*40-20)
+
+candles.push({
+open:open,
+close:close
+})
+
+if(candles.length > 40){
+candles.shift()
+}
+}
+
+function desenhar(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+let x = 10
+
+candles.forEach(c =>{
+
+let color = c.close > c.open ? "#00ff9d" : "#ff3b3b"
+
+ctx.fillStyle = color
+
+let y = canvas.height - c.open
+let h = c.close - c.open
+
+ctx.fillRect(x,y,8,h)
+
+x += 15
+
+})
+
+}
+
+function loop(){
+
+criarCandle()
+desenhar()
+
+requestAnimationFrame(loop)
+
+}
+
+loop()
 
 </script>
 </body>
