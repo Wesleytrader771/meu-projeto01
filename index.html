@@ -313,6 +313,65 @@ requestAnimationFrame(loop)
 loop()
 
 </script>
+<script>
+
+const canvas = document.getElementById("grafico")
+const ctx = canvas.getContext("2d")
+
+canvas.width = window.innerWidth
+canvas.height = 300
+
+let candles = []
+
+function criarCandle(){
+let open = Math.random()*200
+let close = open + (Math.random()*40-20)
+
+candles.push({
+open:open,
+close:close
+})
+
+if(candles.length > 40){
+candles.shift()
+}
+}
+
+function desenhar(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+let x = 10
+
+candles.forEach(c =>{
+
+let color = c.close > c.open ? "#00ff9d" : "#ff3b3b"
+
+ctx.fillStyle = color
+
+let y = canvas.height - c.open
+let h = c.close - c.open
+
+ctx.fillRect(x,y,8,h)
+
+x += 15
+
+})
+
+}
+
+function loop(){
+
+criarCandle()
+desenhar()
+
+requestAnimationFrame(loop)
+
+}
+
+loop()
+
+</script>
 </body>
 
 </html>
