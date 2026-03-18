@@ -1,5 +1,7 @@
 @echo off
-cd C:\Users\wesle\OneDrive\Área de Trabalho\meu-projeto
+cd /d C:\Users\wesley\OneDrive\Área de Trabalho\meu-projeto
+
+git pull
 
 for /l %%x in (1, 1, 50) do (
 echo update %%x >> log.txt
