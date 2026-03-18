@@ -312,3 +312,5 @@ Commit numero 17
 24962 
 Commit numero 18 
 12200 
+Commit numero 19 
+20567 
